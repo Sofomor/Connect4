@@ -1,0 +1,128 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    margin: -20px;
+    color: #231304;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10%);
+    }
+}
+
+@keyframes shadowEffect {
+    0%, 100% {
+        box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.3), 0 50px 20px rgba(0,0,0,0.22);
+    }
+    50% {
+        box-shadow: 0px 90px 70px rgba(0, 0, 0, 0.3), 0 40px 15px rgba(0,0,0,0.18);
+    }
+}
+
+.playerMove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    margin: 50px;
+    animation: float 3s infinite;
+    animation: shadowEffect 3s infinite;
+    font-family: 'Roboto Mono', Serif;
+    font-size: 40px;
+    font-weight: 800;
+    border-radius: 30px; 
+}
+
+.playerMove:first-child {
+    display: flex;
+    align-self: center;
+    background-color:#FAD763;
+    color: #231304;
+}
+  
+.playerMove:last-child {
+    background-color: #D4395C;
+    color: white;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(7, 70px);
+    grid-template-rows: repeat(6, 70px);
+    padding: 15px;
+    background-color: #87C1B2;
+    border-radius: 20px;
+    transition: width .9s ease-in-out;
+    animation: float 3s infinite;
+    animation: shadowEffect 3s infinite;
+    div > {
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    > div > div {
+        display: flex;
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        margin-top: 15px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+        border-radius: 50px;
+        transition: width .2s ease-in-out, height .2s ease-in-out, margin .2s ease-in-out;
+
+        &.cell-player1 {
+            background-color: #FAD763;
+        }
+        
+        &.cell-player2 {
+            background-color: #D4395C;
+        }
+    }
+}
+
+.cell-player1, .cell-player2 {
+    transition: transform 0.5s ease-out;
+}
+
+
+@media screen and (max-width:600px) {
+	.board {
+        grid-template-columns: repeat(7, 42px);
+        grid-template-rows: repeat(6, 42px);
+		width:300px;
+        height: 300px;
+
+        > div > div {
+            display: flex;
+            width: 30px;
+            height: 30px;
+            margin: auto;
+            margin-top: 18px;
+            border-radius: 50px;
+    
+            &.cell-player1 {
+                background-color: #FAD763;
+            }
+            
+            &.cell-player2 {
+                background-color: #D4395C;
+            }
+        }
+	}
+
+    .playerMove {
+        width: 100px;
+        height: 100px;
+    }
+}
