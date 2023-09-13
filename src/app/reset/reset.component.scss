@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+.reset {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #231304;
+    border: none;
+    border-radius: 15px;
+
+    > span {
+        font-size: 20px;
+        text-transform: uppercase;
+        color: white;
+    }
+}

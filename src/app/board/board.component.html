@@ -1,13 +1,15 @@
-<div class="container">
+<!-- <div class="container">
     <h2>Moves</h2>
-</div>
+</div> -->
 <div class="container">
-    <div class="playerMove">
-        <p>{{ player1Moves }} </p>
-    </div>
-    <div class="playerMove">
-        <p>{{ player2Moves }} </p>
-    </div>
+  <div class="playerMove">
+    <p *ngIf="winner !== 1">{{ player1Moves }} </p>
+    <p *ngIf="winner === 1">Win</p>
+</div>
+<div class="playerMove">
+    <p *ngIf="winner !== 2">{{ player2Moves }} </p>
+    <p *ngIf="winner === 2">Win</p>
+</div>
 </div>
 <div class="container">
     <!-- Afficher les coups des joueurs au-dessus du plateau -->

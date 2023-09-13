@@ -39,6 +39,14 @@ export class BoardComponent implements OnInit {
   player2Moves = 0;
 
   cellClicked(rowIndex: number, columnIndex: number): void {
+    if (this.winner) return;
+    if (
+      (this.currentPlayer === 1 && this.player1Moves >= 21) ||
+      (this.currentPlayer === 2 && this.player2Moves >= 21)
+    ) {
+      alert('match nul');
+      return; // Le joueur a atteint le nombre maximum de jetons, ne faites rien
+    }
     // Trouver l'emplacement disponible le plus bas dans la colonne
     let finalRow;
     for (let r = this.rows - 1; r >= 0; r--) {
@@ -61,9 +69,32 @@ export class BoardComponent implements OnInit {
     }
   }
   
-  
+  // alignement
+
+  checkForWin(row: number, col: number): boolean {
+    return this.checkDirection(row, col, 1, 0) ||   // Vérifie horizontalement
+           this.checkDirection(row, col, 0, 1) ||   // Vérifie verticalement
+           this.checkDirection(row, col, 1, 1) ||   // Vérifie en diagonale vers le bas
+           this.checkDirection(row, col, 1, -1);    // Vérifie en diagonale vers le haut
+}
+
+checkDirection(row: number, col: number, rowDir: number, colDir: number): boolean {
+  let count = 0;
+  const player = this.grid[row][col];
+  for (let i = 0; i < 4; i++) {
+      const r = row + rowDir * i;
+      const c = col + colDir * i;
+      if (r >= 0 && r < this.rows && c >= 0 && c < this.columns && this.grid[r][c] === player) {
+          count++;
+      } else {
+          break;
+      }
+  }
+  return count === 4;
+}
 
 
+winner: number | null = null;
 
 
   animateDrop(finalRow: number, columnIndex: number): void {
@@ -103,8 +134,13 @@ export class BoardComponent implements OnInit {
         this.grid[currentRow][columnIndex] = this.currentPlayer;
     }, 50);
 
-    setTimeout(() => this.togglePlayer(), (finalRow + 2*bounceHeight) * 50); // on prend en compte le temps total de l'animation pour changer de joueur
-}
+    setTimeout(() => {
+      if (this.checkForWin(finalRow, columnIndex)) {
+        this.winner = this.currentPlayer;
+        return;
+    }
+      this.togglePlayer();
+  }, (finalRow + 2 * bounceHeight) * 50);}
 
 togglePlayer() {
   this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;

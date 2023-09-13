@@ -12,6 +12,7 @@ import { BoardComponent } from './board/board.component';
 import { CellComponent } from './cell/cell.component';
 import { GameComponent } from './game/game.component';
 import { GameStatusComponent } from './game-status/game-status.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GameStatusComponent } from './game-status/game-status.component';
     BoardComponent,
     CellComponent,
     GameComponent,
-    GameStatusComponent
+    GameStatusComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,
