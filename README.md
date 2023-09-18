@@ -1,31 +1,32 @@
-# recruitment-frontend-exercise
+# Connect4
 
-Create a Connect 4 on Angular latest version and Angular Material framework.
+Connect4 est un jeu de stratégie classique où deux joueurs déposent des jetons dans une grille, et le premier à aligner quatre jetons consécutifs horizontalement, verticalement ou en diagonale gagne la partie.
 
-## Required : 
-- HTML5 (BEM syntax) + SCSS integration.
-- Responsive and animation management: users must be able to play on their mobile.
-- Implementation of components, services, directives related to the logic of the game.
-- The use of store(s) via ngxs is also required.
-- Code documentation.
+## Structure du projet
+
+Le projet est organisé comme suit :
+    * connect4/
+        * src/
+            * app/
+                * components/
+                * reset/ : Ce composant permet de réinitialiser la partie.
+                * game-status/ : Enregistre l'état actuel du jeu
+                * game/ : Composant principal du jeu.
+                * cell/ : Représente une cellule individuelle sur le plateau.
+                * board/ : Affiche le plateau de jeu.
+                * services/
+                * night-mode/ : Service pour activer/désactiver un mode sombre pour le jeu.
+                * directives/
+                * countdown/ : Directive pour afficher un compte à rebours.
+                * styles/
+                * app.component.scss : Style principal de l'application.
+                * app.component.html : Structure principale de l'application.
+                * app.component.ts : Logique principale de l'application.
+
   
-## Bonus:
-- User preferences: management of themes (dark / light mode) according to material design logic.
-- Use CSS Variables
-- Implementation of unit and / or end to end (cypress) tests.
-- SVG animation(s).
-- i18n / a11y friendly.
-  
-## Rules of the game:
-The goal of the game is to line up a series of 4 pawns of the same color on a grid with 6 rows and 7 columns.
+## Installation
+Pour installer et exécuter le jeu :
+git clone https://github.com/sofomor/connect4.git cd connect4
+npm install ng serve
 
-Each player has 21 pawns of one color (by convention, usually yellow or red). Alternately, the two players place a pawn in the column of their choice, the pawn then slides to the lowest possible position in the said column.
-
-The winner is the player who first achieves a consecutive alignment (horizontal, vertical or diagonal) of at least four pawns of his color. If, while all the squares of the game grid are filled, neither of the two players has made such an alignment, the game end in a tie.
-
-## Extra information:
-
-The use of third-party libraries is authorised but not encouraged.
-Use Angular framework on latest versions.
-
-No AI is needed, each player plays one after the other.
+Ouvrez un navigateur et accédez à http://localhost:4200/
