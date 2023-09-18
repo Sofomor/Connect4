@@ -1,18 +1,23 @@
-// app.module.ts
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms'; // Importez FormsModule ici
+import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
 
-import { NgxsModule } from '@ngxs/store';
-import { AppState } from './app.state';
+// Importez vos composants et votre directive
+import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { CellComponent } from './cell/cell.component';
 import { GameComponent } from './game/game.component';
 import { GameStatusComponent } from './game-status/game-status.component';
 import { ResetComponent } from './reset/reset.component';
+import { CountdownDirective } from './countdown.directive';
+import { NightModeService } from './night-mode.service';
+
+
+
 
 @NgModule({
   declarations: [
@@ -21,16 +26,19 @@ import { ResetComponent } from './reset/reset.component';
     CellComponent,
     GameComponent,
     GameStatusComponent,
-    ResetComponent
+    ResetComponent,
+    CountdownDirective, 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule, // Ajoutez FormsModule ici
-    NgxsModule.forRoot([AppState])
+    FormsModule,
+    DragDropModule,
+    CommonModule,
+    // ...
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [NightModeService],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}
+ 

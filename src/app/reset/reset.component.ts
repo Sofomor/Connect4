@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-reset',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent {
+  @Output() resetClicked = new EventEmitter<void>();
 
+  onResetButtonClick(): void {
+    this.resetClicked.emit();
+  }
 }

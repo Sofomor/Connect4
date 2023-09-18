@@ -1,58 +1,38 @@
-.container {
+.board-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
 
-h2 {
-    margin: -20px;
-    color: #231304;
-}
+    &__player-move {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 100px;
+        margin: 50px;
+        animation: float 3s infinite, shadowEffect 3s infinite;
+        font-family: 'Roboto Mono', Serif;
+        font-size: 40px;
+        font-weight: 800;
+        border-radius: 30px;
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
+        &:first-child {
+            display: flex;
+            align-self: center;
+            background-color: #FAD763;
+            color: #231304;
+        }
+
+        &:last-child {
+            background-color: #D4395C;
+            color: white;
+        }
     }
-    50% {
-        transform: translateY(-10%);
-    }
-}
 
-@keyframes shadowEffect {
-    0%, 100% {
-        box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.3), 0 50px 20px rgba(0,0,0,0.22);
+    &__player-result, &__player-win {
+        margin: 15px;
     }
-    50% {
-        box-shadow: 0px 90px 70px rgba(0, 0, 0, 0.3), 0 40px 15px rgba(0,0,0,0.18);
-    }
-}
-
-.playerMove {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 100px;
-    margin: 50px;
-    animation: float 3s infinite;
-    animation: shadowEffect 3s infinite;
-    font-family: 'Roboto Mono', Serif;
-    font-size: 40px;
-    font-weight: 800;
-    border-radius: 30px; 
-}
-
-.playerMove:first-child {
-    display: flex;
-    align-self: center;
-    background-color:#FAD763;
-    color: #231304;
-}
-  
-.playerMove:last-child {
-    background-color: #D4395C;
-    color: white;
 }
 
 .board {
@@ -63,15 +43,16 @@ h2 {
     background-color: #87C1B2;
     border-radius: 20px;
     transition: width .9s ease-in-out;
-    animation: float 3s infinite;
-    animation: shadowEffect 3s infinite;
-    div > {
-        display: flex;
-        justify-content: center;
-        
+    animation: float 3s infinite, shadowEffect 3s infinite;
+
+    &__col {
+        > div {
+            display: flex;
+            justify-content: center;
+        }
     }
 
-    > div > div {
+    &__cell {
         display: flex;
         width: 50px;
         height: 50px;
@@ -84,17 +65,12 @@ h2 {
         &.cell-player1 {
             background-color: #FAD763;
         }
-        
+
         &.cell-player2 {
             background-color: #D4395C;
         }
     }
 }
-
-.cell-player1, .cell-player2 {
-    transition: transform 0.5s ease-out;
-}
-
 
 @media screen and (max-width:600px) {
 	.board {

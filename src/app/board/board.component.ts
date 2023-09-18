@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-board',
@@ -6,13 +6,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
+  countdownTime: number = 30;
   readonly rows = 6;
   readonly columns = 7;
-  grid: number[][] = []; // 0 pour vide, 1 pour joueur 1, 2 pour joueur 2
-  currentPlayer = 1;  // Commence avec le joueur 1
+  grid: number[][] = [];
+  currentPlayer = 1;
+  countdownInterval: any;
+
+  @Output() gameReset = new EventEmitter<void>();
 
   ngOnInit() {
     this.initializeGrid();
+    this.startCountdownForCurrentPlayer();
+  }
+
+  startCountdownForCurrentPlayer() {
+    this.countdownTime = 30;
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+    this.countdownInterval = setInterval(() => {
+      this.countdownTime--;
+      if (this.countdownTime <= 0) {
+        this.togglePlayer();
+        this.startCountdownForCurrentPlayer();
+      }
+    }, 1000);
   }
 
   initializeGrid() {
@@ -34,7 +53,6 @@ export class BoardComponent implements OnInit {
     return '';
   }
 
-
   player1Moves = 0;
   player2Moves = 0;
 
@@ -44,10 +62,10 @@ export class BoardComponent implements OnInit {
       (this.currentPlayer === 1 && this.player1Moves >= 21) ||
       (this.currentPlayer === 2 && this.player2Moves >= 21)
     ) {
-      alert('match nul');
-      return; // Le joueur a atteint le nombre maximum de jetons, ne faites rien
+      alert("Match nul");
+      return;
     }
-    // Trouver l'emplacement disponible le plus bas dans la colonne
+
     let finalRow;
     for (let r = this.rows - 1; r >= 0; r--) {
       if (this.grid[r][columnIndex] === 0) {
@@ -57,92 +75,97 @@ export class BoardComponent implements OnInit {
     }
   
     if (finalRow !== undefined) {
-      // Incrémentez le nombre de coups du joueur actuel
       if (this.currentPlayer === 1) {
         this.player1Moves++;
       } else if (this.currentPlayer === 2) {
         this.player2Moves++;
       }
-  
-      // Effectuez l'animation de la chute du jeton
+
       this.animateDrop(finalRow, columnIndex);
     }
   }
-  
-  // alignement
 
   checkForWin(row: number, col: number): boolean {
-    return this.checkDirection(row, col, 1, 0) ||   // Vérifie horizontalement
-           this.checkDirection(row, col, 0, 1) ||   // Vérifie verticalement
-           this.checkDirection(row, col, 1, 1) ||   // Vérifie en diagonale vers le bas
-           this.checkDirection(row, col, 1, -1);    // Vérifie en diagonale vers le haut
-}
+    return this.checkDirection(row, col, 1, 0) || 
+           this.checkDirection(row, col, 0, 1) || 
+           this.checkDirection(row, col, 1, 1) || 
+           this.checkDirection(row, col, 1, -1);
+  }
 
-checkDirection(row: number, col: number, rowDir: number, colDir: number): boolean {
-  let count = 0;
-  const player = this.grid[row][col];
-  for (let i = 0; i < 4; i++) {
+  checkDirection(row: number, col: number, rowDir: number, colDir: number): boolean {
+    const player = this.grid[row][col];
+    let count = 0;
+    for (let i = -3; i <= 3; i++) {
       const r = row + rowDir * i;
       const c = col + colDir * i;
       if (r >= 0 && r < this.rows && c >= 0 && c < this.columns && this.grid[r][c] === player) {
-          count++;
+        count++;
+        if (count === 4) return true;
       } else {
-          break;
+        count = 0;
       }
+    }
+    return false;
   }
-  return count === 4;
-}
 
-
-winner: number | null = null;
-
+  winner: number | null = null;
 
   animateDrop(finalRow: number, columnIndex: number): void {
     let currentRow = 0;
-    let isBouncing = false; // indique si le jeton est en train de rebondir
-    const bounceHeight = 1; // hauteur du rebond
+    let isBouncing = false;
+    const bounceHeight = 1;
 
     const dropInterval = setInterval(() => {
-        // Effacer la position actuelle du jeton pour l'animation
-        this.grid[currentRow][columnIndex] = 0;
+      this.grid[currentRow][columnIndex] = 0;
 
-        if (currentRow < finalRow && !isBouncing) {
-            currentRow++;
-        } else if (currentRow === finalRow && !isBouncing) {
-            // Si le jeton est supposé tomber sur la rangée supérieure, évitez le rebond.
-            if (finalRow === 0) {
-                this.grid[currentRow][columnIndex] = this.currentPlayer;
-                clearInterval(dropInterval);
-                this.togglePlayer();
-                return;
-            }
-
-            // Commencer le rebond
-            isBouncing = true;
-            currentRow -= bounceHeight;
-        } else if (isBouncing) {
-            // Terminer le rebond
-            currentRow++;
-            if (currentRow === finalRow) {
-                clearInterval(dropInterval);
-            }
-        } else {
-            clearInterval(dropInterval); // arrête l'animation si elle n'est pas terminée pour une raison quelconque
+      if (currentRow < finalRow && !isBouncing) {
+        currentRow++;
+      } else if (currentRow === finalRow && !isBouncing) {
+        if (finalRow === 0) {
+          this.grid[currentRow][columnIndex] = this.currentPlayer;
+          clearInterval(dropInterval);
+          return;
         }
 
-        // Mettre à jour la nouvelle position du jeton
-        this.grid[currentRow][columnIndex] = this.currentPlayer;
+        isBouncing = true;
+        currentRow -= bounceHeight;
+      } else if (isBouncing) {
+        currentRow++;
+        if (currentRow === finalRow) {
+          clearInterval(dropInterval);
+        }
+      } else {
+        clearInterval(dropInterval);
+      }
+
+      this.grid[currentRow][columnIndex] = this.currentPlayer;
     }, 50);
 
     setTimeout(() => {
       if (this.checkForWin(finalRow, columnIndex)) {
         this.winner = this.currentPlayer;
         return;
-    }
+      }
       this.togglePlayer();
-  }, (finalRow + 2 * bounceHeight) * 50);}
+    }, (finalRow + 2 * bounceHeight) * 50);
+  }
 
-togglePlayer() {
-  this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+  futureDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+  resetGame(): void {
+    this.initializeGrid();
+    this.currentPlayer = 1;
+    this.player1Moves = 0;
+    this.player2Moves = 0;
+    this.winner = null;
+    this.countdownTime = 30;
+    this.startCountdownForCurrentPlayer();
+    this.gameReset.emit();
+  }
+
+  togglePlayer() {
+    this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+    this.startCountdownForCurrentPlayer();
+  }
 }
-}
+

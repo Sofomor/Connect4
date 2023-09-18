@@ -1,27 +1,33 @@
-# Connect4
+Connect4
+Connect4 est un jeu de stratégie classique où deux joueurs déposent des jetons dans une grille, et le premier à aligner quatre jetons consécutifs horizontalement, verticalement ou en diagonale gagne la partie.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+Structure du projet
+Le projet est organisé comme suit :
 
-## Development server
+connect4/
+src/
+app/
+components/
+reset/ : Ce composant permet de réinitialiser la partie.
+game-status/ : Affiche l'état actuel du jeu (par exemple, quel joueur doit jouer ou qui a gagné).
+game/ : Composant principal du jeu.
+cell/ : Représente une cellule individuelle sur le plateau.
+board/ : Affiche le plateau de jeu.
+services/
+night-mode/ : Service pour activer/désactiver un mode sombre pour le jeu.
+directives/
+countdown/ : Directive pour afficher un compte à rebours.
+styles/
+app.component.scss : Style principal de l'application.
+app.component.html : Structure principale de l'application.
+app.component.ts : Logique principale de l'application.
+Installation
+Pour installer et exécuter le jeu :
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+bash
+Copy code
+git clone https://github.com/votre_pseudo/connect4.git
+cd connect4
+npm install
+ng serve
+Ouvrez un navigateur et accédez à http://localhost:4200/.

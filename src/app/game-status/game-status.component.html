@@ -1,5 +1,4 @@
 <div *ngIf="gameStatus === 'ongoing'">
-    <p>Nombre de coups du joueur 1 : {{ player1Moves }}</p>
-    <p>Nombre de coups du joueur 2 : {{ player2Moves }}</p>
-  </div>
-  <p *ngIf="gameStatus !== 'ongoing'">La partie est terminée.</p> 
+    <p>{{ player1Moves }}</p>
+    <p>{{ player2Moves }}</p>
+</div>

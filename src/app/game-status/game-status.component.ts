@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./game-status.component.scss']
 })
 export class GameStatusComponent {
-  @Input() gameStatus: string = ''; // Initialisation avec une valeur par défaut
-  @Input() player1Moves: number = 0; // Initialisation avec une valeur par défaut
-  @Input() player2Moves: number = 0; // Initialisation avec une valeur par défaut
+  @Input() gameStatus: string = '';
+  @Input() player1Moves: number = 0; 
+  @Input() player2Moves: number = 0; 
 }

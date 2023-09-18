@@ -1,21 +1,22 @@
-.container {
+.reset-btn__container {
     display: flex;
     justify-content: center;
     margin: 50px;
 }
 
-.reset {
+.reset-btn {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
     padding: 20px;
-    background-color: #231304;
+    background-color: #87C1B2;
+    font-weight: 800;
     border: none;
     border-radius: 15px;
+    cursor: pointer;
 
-    > span {
+    &__text {
         font-size: 20px;
         text-transform: uppercase;
-        color: white;
+        color: #231304;
     }
 }

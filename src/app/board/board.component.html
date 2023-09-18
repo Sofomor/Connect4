@@ -1,26 +1,21 @@
-<!-- <div class="container">
-    <h2>Moves</h2>
-</div> -->
-<div class="container">
-  <div class="playerMove">
-    <p *ngIf="winner !== 1">{{ player1Moves }} </p>
-    <p *ngIf="winner === 1">Win</p>
+ <div class="board-container">
+  <span class="board-container__countdown">Temps restant pour le joueur actuel : {{ countdownTime }}s</span>
 </div>
-<div class="playerMove">
-    <p *ngIf="winner !== 2">{{ player2Moves }} </p>
-    <p *ngIf="winner === 2">Win</p>
-</div>
-</div>
-<div class="container">
-    <!-- Afficher les coups des joueurs au-dessus du plateau -->
-  
-    <div class="board">
-      <div *ngFor="let col of [0,1,2,3,4,5,6]">
-        <div *ngFor="let row of [0,1,2,3,4,5]" 
-             (click)="cellClicked(row, col)"
-             [ngClass]="getCellClass(grid[row][col])">
-        </div>
-      </div>
-    </div>
+<div class="board-container"></div>
+<div class="board-container">
+  <div class="board-container__player-move">
+      <p class="board-container__player-result" *ngIf="winner !== 1">{{ player1Moves }}</p>
+      <p class="board-container__player-win" *ngIf="winner === 1">Win</p>
   </div>
-  
+  <div class="board-container__player-move">
+      <p class="board-container__player-result" *ngIf="winner !== 2">{{ player2Moves }}</p>
+      <p class="board-container__player-win" *ngIf="winner === 2">Win</p>
+  </div>
+</div>
+<div class="board-container">
+  <div class="board">
+      <div class="board__col" *ngFor="let col of [0,1,2,3,4,5,6]; let colIndex = index" (click)="cellClicked(5, col)">
+          <div class="board__cell" *ngFor="let row of [0,1,2,3,4,5]; let rowIndex = index" [ngClass]="getCellClass(grid[rowIndex][colIndex])"></div>
+      </div>
+  </div>
+</div>
