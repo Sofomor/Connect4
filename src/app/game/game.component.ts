@@ -15,10 +15,14 @@ export class GameComponent {
 
   constructor(private nightModeService: NightModeService, private el: ElementRef) {}
 
+// Mode jour + mode nuit
+
   toggleNightMode(): void {
     this.nightModeService.isNightMode = !this.nightModeService.isNightMode;
     console.log('Night mode activated:', this.nightModeService.isNightMode);
   
+// Récupération des balises + modification des couleurs
+
     const body = document.body;
     const button = this.el.nativeElement.querySelector('button');
     const h1 = this.el.nativeElement.querySelector('h1');
@@ -34,7 +38,7 @@ export class GameComponent {
       span.style.color = 'white';
 
     } else {
-      // Mode jour
+// Mode jour
       body.style.backgroundColor = 'white'; 
       button.style.backgroundColor = '#231304'; 
       h1.style.color = '#231304';

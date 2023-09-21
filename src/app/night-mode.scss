@@ -1,15 +1,14 @@
+// Styles du mode nuit
+
 body {
   transition: background-color 0.3s ease; 
 }
-
 
 body.night-mode {
     background-color: #231304;
 
   }
-
-
   
-  h1.night-mode {
+h1.night-mode {
     color: white!important; 
   }

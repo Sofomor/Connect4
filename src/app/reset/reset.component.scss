@@ -1,3 +1,5 @@
+// Styles du bouton reset et du text qu'il contient
+
 .reset-btn__container {
     display: flex;
     justify-content: center;
@@ -7,6 +9,7 @@
 .reset-btn {
     display: flex;
     justify-content: center;
+    margin-top: -10px;
     padding: 20px;
     background-color: #87C1B2;
     font-weight: 800;
@@ -17,6 +20,6 @@
     &__text {
         font-size: 20px;
         text-transform: uppercase;
-        color: #231304;
+        color: white;
     }
 }

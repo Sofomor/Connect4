@@ -6,13 +6,13 @@ export class PlayMove {
     constructor(public column: number) {}
 }
 
-// Model
+// R = rouge, Y = jaune, NULL = vide
 export interface Connect4StateModel {
-    board: string[][]; // 'R', 'Y', or null (for Red, Yellow, or empty)
-    currentPlayer: string; // 'R' or 'Y'
+    board: string[][]; 
+    currentPlayer: string;
 }
 
-// Initial state
+// État initial
 const defaultState: Connect4StateModel = {
     board: Array(6).fill(null).map(() => Array(7).fill(null)),
     currentPlayer: 'R'
@@ -22,6 +22,8 @@ const defaultState: Connect4StateModel = {
     name: 'connect4',
     defaults: defaultState
 })
+
+// Joueur actuel + récupération de l'état actuel
 export class AppState {
     @Selector()
     static board(state: Connect4StateModel) {
@@ -36,7 +38,5 @@ export class AppState {
     @Action(PlayMove)
     play(ctx: StateContext<Connect4StateModel>, action: PlayMove) {
         const state = ctx.getState();
-        // TODO: Implement the game logic here when a move is played.
-        // Switch players, update the board, etc.
     }
 }
