@@ -64,8 +64,9 @@ ng generate service nomDuservice
 
 ## Screenshot
 
-![Lightmode](https://github.com/Sofomor/connect4-angular/assets/93552754/b68c2a58-debe-4221-abf4-d465c9d6d346)
-![Darkmode](https://github.com/Sofomor/connect4-angular/assets/93552754/dff4e5db-a2ea-40f8-9a5d-522405ae3810)
+![Lightmode](https://github.com/Sofomor/Connect4/assets/93552754/b8cb62a9-a0e3-4ab8-a4a4-335ac4fb50e5)
+![Darkmode](https://github.com/Sofomor/Connect4/assets/93552754/9945a457-3837-413f-a025-b781b3c2e20f)
+
 
 ----------------------------------------------------------
 
